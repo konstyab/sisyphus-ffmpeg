@@ -1,0 +1,2 @@
+tar: ffmpeg
+copy: *.sh
