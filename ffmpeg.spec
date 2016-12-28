@@ -2,9 +2,26 @@ Name: ffmpeg
 Version: 3.2.2
 Release: alt5
 %define enable_license_lgplv3 0
+%define enable_license_gplv2 1
 
-# old libx265 from sisyphus doesn't fit, newer is needed. Add new libx265 version to sisyphus and use it (but does it break existing programs??). Or set next flag to 0 (the safe way)
-%define use_libx265 1
+%if %enable_license_gplv2
+  %if %enable_license_lgplv3
+    License: GPLv3+
+  %else
+    License: GPLv2+
+%else
+  %if %enable_license_lgplv3
+    License: LGPLv3+
+  %else
+    License: LGPLv2+
+  %endif
+%endif
+
+%if %enable_license_glpv2
+  %define use_libx265 1
+%else
+  %define use_libx265 0
+%endif
 
 %define libs_suffix -ffmpeg-renamed-libs
 %define libsff avcodec%libs_suffix avdevice%libs_suffix avfilter%libs_suffix avformat%libs_suffix avresample%libs_suffix avutil%libs_suffix postproc%libs_suffix swresample%libs_suffix swscale%libs_suffix
@@ -15,7 +32,6 @@ Release: alt5
 Summary: FFmpeg libraries (renamed) and programs
 
 
-License: GPLv3+
 Group: Video
 Url: https://github.com/FFmpeg/FFmpeg
 
@@ -204,19 +220,33 @@ conf_lib_opts="--enable-chromaprint
   --enable-netcdf
   --enable-openal
   --enable-opengl
+%if %enable_license_lgplv3
   --enable-version3
+%endif
 %if %enable_license_lgplv3
   --enable-gmp
 %endif
+%if %enable_license_gplv2
   --enable-gpl
-  --enable-frei0r
-%if %repo_p7
-%else
-  --enable-librubberband
 %endif
+%if %enable_license_gplv2
+  --enable-frei0r
+%endif
+%if %enable_license_gplv2
+  %if %repo_p7
+  %else
+    --enable-librubberband
+  %endif
+%endif
+%if %enable_license_gplv2
   --enable-libsmbclient
+%endif
+%if %enable_license_gplv2
   --enable-libx264
+%endif
+%if %enable_license_gplv2
   --enable-libxvid
+%endif
   --enable-libvpx"
 %ifarch x86_64
   yasm_opt="--enable-yasm"
@@ -296,6 +326,7 @@ RPM_VERIFY_ELF_METHOD="relaxed"
 %changelog
 * Wed Dec 28 2016 Konstantin Yablochkin <konstyab@altlinux.org> 3.2.2-alt5
 - switch to GPLv2
+- added auto component selection and license setup
 * Sun Dec 11 2016 Sample Maintainer <samplemaintainer@altlinux.org> 3.2.2-alt4
 - change libs suffix to -ffmpeg-renamed-libs
 - add ffmpeg-renamed-libs, ffmpeg-renamed-libs-devel packages
