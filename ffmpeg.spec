@@ -174,7 +174,9 @@ conf_lib_opts="--enable-chromaprint
     --enable-libx265
   %endif
   --enable-gcrypt
-  --enable-gmp
+  %if %enable_license_lgplv3
+    --enable-gmp
+  %endif
   --enable-gnutls
   --enable-ladspa
   %if %repo_p7
@@ -226,9 +228,6 @@ conf_lib_opts="--enable-chromaprint
   --enable-opengl
   %if %enable_license_lgplv3
     --enable-version3
-  %endif
-  %if %enable_license_lgplv3
-    --enable-gmp
   %endif
   %if %enable_license_gplv2
     --enable-gpl
