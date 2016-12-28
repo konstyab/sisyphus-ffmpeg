@@ -42,14 +42,14 @@ Url: https://github.com/FFmpeg/FFmpeg
 Packager: Sample Maintainer <samplemaintainer@altlinux.org>
 BuildPreReq: yasm
 %if %repo_p7
-  BuildPreReq: gcc-c++
+BuildPreReq: gcc-c++
 %else
-  BuildPreReq: gcc5-c++
+BuildPreReq: gcc5-c++
 %endif
 BuildPreReq: libchromaprint-devel frei0r-devel libgcrypt-devel libgmp-devel libgnutls-devel ladspa_sdk libass-devel libbluray-devel libbs2b-devel libcaca-devel libcelt-devel libcdio-devel libdc1394-devel flite-devel fontconfig-devel libfreetype-devel libfribidi-devel libgme-devel libgsm-devel libiec61883-devel libilbc-devel libmodplug-devel liblame-devel libnut-devel libopencore-amrnb-devel libopencore-amrwb-devel libopencv-devel libopenjpeg-devel
 %if %repo_p7
 %else
-  BuildPreReq: libopenjpeg2.0-devel
+BuildPreReq: libopenjpeg2.0-devel
 %endif
 BuildPreReq: libopus-devel
 BuildPreReq: libpulseaudio-devel
@@ -76,7 +76,7 @@ BuildPreReq: libx264-devel
 
 %if %repo_p7
 %else
-  BuildPreReq: libx265-devel
+BuildPreReq: libx265-devel
 %endif
 BuildPreReq: libxcb-devel
 BuildPreReq: libxcbutil-keysyms-devel
@@ -87,9 +87,9 @@ BuildPreReq: libxcbutil-icccm-devel
 BuildPreReq: libxcbutil-image-devel
 %if %repo_p7
 %else
-  BuildPreReq: libxcbutil-xrm-devel
-  BuildPreReq: libxcbutil-cursor-devel
-  BuildPreReq: libxcbutil-proto
+BuildPreReq: libxcbutil-xrm-devel
+BuildPreReq: libxcbutil-cursor-devel
+BuildPreReq: libxcbutil-proto
 %endif
 BuildPreReq: libxvid-devel
 BuildPreReq: libzeromq-devel
@@ -102,7 +102,7 @@ BuildPreReq: libGLU-devel
 BuildPreReq: libfreeglut-devel
 %if %repo_p7
 %else
-  BuildPreReq: libcdio-paranoia-devel
+BuildPreReq: libcdio-paranoia-devel
 %endif
 Source: %name-%version.tar
 
