@@ -1,6 +1,7 @@
 Name: ffmpeg
 Version: 3.2.2
-Release: alt4
+Release: alt5
+%define enable_license_lgplv3 0
 
 # old libx265 from sisyphus doesn't fit, newer is needed. Add new libx265 version to sisyphus and use it (but does it break existing programs??). Or set next flag to 0 (the safe way)
 %define use_libx265 1
@@ -135,7 +136,7 @@ ffmpeg, ffprobe, ffserver. From FFmpeg package
 # libx264 is gpl
 # libxvid is gpl
 # .c files for libbut cause compulation errors (smth like trying to access member of smth which is not union or struct)
-# gmp us LGPLv3, use --enable-version3
+# gmp is LGPLv3, use --enable-version3
 # libiec61883 not found
 # libcelt must be installed and version >= 0.11.0
 # libflite not found
@@ -204,7 +205,9 @@ conf_lib_opts="--enable-chromaprint
   --enable-openal
   --enable-opengl
   --enable-version3
+%if %enable_license_lgplv3
   --enable-gmp
+%endif
   --enable-gpl
   --enable-frei0r
 %if %repo_p7
@@ -291,9 +294,11 @@ RPM_VERIFY_ELF_METHOD="relaxed"
 
 
 %changelog
+* Wed Dec 28 2016 Konstantin Yablochkin <konstyab@altlinux.org> 3.2.2-alt5
+- switch to GPLv2
 * Sun Dec 11 2016 Sample Maintainer <samplemaintainer@altlinux.org> 3.2.2-alt4
-- change libs suffix to -ffmpeg
-- add ffmpeg-libs, ffmpeg-libs-devel packages
+- change libs suffix to -ffmpeg-renamed-libs
+- add ffmpeg-renamed-libs, ffmpeg-renamed-libs-devel packages
 * Sun Dec 11 2016 Sample Maintainer <samplemaintainer@altlinux.org> 3.2.2-alt3
 - fixed i586 ./configure flags
 * Fri Dec 09 2016 Sample Maintainer <samplemaintainer@altlinux.org> 3.2.2-alt2
