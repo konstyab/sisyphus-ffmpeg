@@ -9,6 +9,7 @@ Release: alt5
     %define license GPLv3+
   %else
     %define license GPLv2+
+  %endif
 %else
   %if %enable_license_lgplv3
     %define license LGPLv3+
@@ -41,14 +42,14 @@ Url: https://github.com/FFmpeg/FFmpeg
 Packager: Sample Maintainer <samplemaintainer@altlinux.org>
 BuildPreReq: yasm
 %if %repo_p7
-BuildPreReq: gcc-c++
+  BuildPreReq: gcc-c++
 %else
-BuildPreReq: gcc5-c++
+  BuildPreReq: gcc5-c++
 %endif
 BuildPreReq: libchromaprint-devel frei0r-devel libgcrypt-devel libgmp-devel libgnutls-devel ladspa_sdk libass-devel libbluray-devel libbs2b-devel libcaca-devel libcelt-devel libcdio-devel libdc1394-devel flite-devel fontconfig-devel libfreetype-devel libfribidi-devel libgme-devel libgsm-devel libiec61883-devel libilbc-devel libmodplug-devel liblame-devel libnut-devel libopencore-amrnb-devel libopencore-amrwb-devel libopencv-devel libopenjpeg-devel
 %if %repo_p7
 %else
-BuildPreReq: libopenjpeg2.0-devel
+  BuildPreReq: libopenjpeg2.0-devel
 %endif
 BuildPreReq: libopus-devel
 BuildPreReq: libpulseaudio-devel
@@ -75,7 +76,7 @@ BuildPreReq: libx264-devel
 
 %if %repo_p7
 %else
-BuildPreReq: libx265-devel
+  BuildPreReq: libx265-devel
 %endif
 BuildPreReq: libxcb-devel
 BuildPreReq: libxcbutil-keysyms-devel
@@ -86,9 +87,9 @@ BuildPreReq: libxcbutil-icccm-devel
 BuildPreReq: libxcbutil-image-devel
 %if %repo_p7
 %else
-BuildPreReq: libxcbutil-xrm-devel
-BuildPreReq: libxcbutil-cursor-devel
-BuildPreReq: libxcbutil-proto
+  BuildPreReq: libxcbutil-xrm-devel
+  BuildPreReq: libxcbutil-cursor-devel
+  BuildPreReq: libxcbutil-proto
 %endif
 BuildPreReq: libxvid-devel
 BuildPreReq: libzeromq-devel
@@ -101,7 +102,7 @@ BuildPreReq: libGLU-devel
 BuildPreReq: libfreeglut-devel
 %if %repo_p7
 %else
-BuildPreReq: libcdio-paranoia-devel
+  BuildPreReq: libcdio-paranoia-devel
 %endif
 Source: %name-%version.tar
 
@@ -169,24 +170,24 @@ ffmpeg, ffprobe, ffserver. From FFmpeg package
 #--enable-libvpx 
 #conf_lib_opts=""
 conf_lib_opts="--enable-chromaprint
-%if %use_libx265
-  --enable-libx265
-%endif
+  %if %use_libx265
+    --enable-libx265
+  %endif
   --enable-gcrypt
   --enable-gmp
   --enable-gnutls
   --enable-ladspa
-%if %repo_p7
-%else
-  --enable-libass
-%endif
+  %if %repo_p7
+  %else
+    --enable-libass
+  %endif
   --enable-libbluray
   --enable-libbs2b
   --enable-libcaca
-%if %repo_p7
-%else
-  --enable-libcdio
-%endif
+  %if %repo_p7
+  %else
+    --enable-libcdio
+  %endif
   --enable-libdc1394
   --enable-libfontconfig
   --enable-libfreetype
@@ -207,10 +208,10 @@ conf_lib_opts="--enable-chromaprint
   --enable-libsoxr
   --enable-libspeex
   --enable-libssh
-%if %repo_p7
-%else
-  --enable-libtesseract
-%endif
+  %if %repo_p7
+  %else
+    --enable-libtesseract
+  %endif
   --enable-libtheora
   --enable-libtwolame
   --enable-libv4l2
@@ -223,44 +224,44 @@ conf_lib_opts="--enable-chromaprint
   --enable-netcdf
   --enable-openal
   --enable-opengl
-%if %enable_license_lgplv3
-  --enable-version3
-%endif
-%if %enable_license_lgplv3
-  --enable-gmp
-%endif
-%if %enable_license_gplv2
-  --enable-gpl
-%endif
-%if %enable_license_gplv2
-  --enable-frei0r
-%endif
-%if %enable_license_gplv2
-  %if %repo_p7
-  %else
-    --enable-librubberband
+  %if %enable_license_lgplv3
+    --enable-version3
   %endif
-%endif
-%if %enable_license_gplv2
-  --enable-libsmbclient
-%endif
-%if %enable_license_gplv2
-  --enable-libx264
-%endif
-%if %enable_license_gplv2
-  --enable-libxvid
-%endif
+  %if %enable_license_lgplv3
+    --enable-gmp
+  %endif
+  %if %enable_license_gplv2
+    --enable-gpl
+  %endif
+  %if %enable_license_gplv2
+    --enable-frei0r
+  %endif
+  %if %enable_license_gplv2
+    %if %repo_p7
+    %else
+      --enable-librubberband
+    %endif
+  %endif
+  %if %enable_license_gplv2
+    --enable-libsmbclient
+  %endif
+  %if %enable_license_gplv2
+    --enable-libx264
+  %endif
+  %if %enable_license_gplv2
+    --enable-libxvid
+  %endif
   --enable-libvpx"
-%ifarch x86_64
-  yasm_opt="--enable-yasm"
-#  strip_opt=""
-  extra_opts=""
-%else
-  yasm_opt="--disable-yasm"
-#  strip_opt="--disable-stripping"
-#  extra_opts="--disable-asm"
-  extra_opts=""
-%endif
+  %ifarch x86_64
+    yasm_opt="--enable-yasm"
+    #strip_opt=""
+    extra_opts=""
+  %else
+    yasm_opt="--disable-yasm"
+    #strip_opt="--disable-stripping"
+    #extra_opts="--disable-asm"
+    extra_opts=""
+  %endif
 ./configure --prefix=/usr --enable-avcodec --enable-avformat --enable-avfilter --enable-avdevice --enable-swscale --enable-swresample --arch=$var_arch --cpu=$var_arch $yasm_opt --enable-shared --enable-static --libdir=%_libdir --enable-pic --enable-avresample --build-suffix=%libs_suffix $extra_opts $conf_lib_opts
 make clean
 #%%make_build LDFLAGS=-Wl,--warn-unresolved-symbols
