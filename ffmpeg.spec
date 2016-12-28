@@ -20,7 +20,7 @@ Release: alt5
 License: %license
 
 
-%if %enable_license_glpv2
+%if %enable_license_gplv2
   %define use_libx265 1
 %else
   %define use_libx265 0
