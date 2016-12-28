@@ -198,8 +198,10 @@ conf_lib_opts="--enable-chromaprint
   --enable-libgsm
   --enable-libmodplug
   --enable-libmp3lame
-  --enable-libopencore-amrnb
-  --enable-libopencore-amrwb
+  %if %enable_license_lgplv3
+    --enable-libopencore-amrnb
+    --enable-libopencore-amrwb
+  %endif
   --enable-libopencv
   --enable-libopenjpeg
   --enable-libopus
@@ -217,7 +219,9 @@ conf_lib_opts="--enable-chromaprint
   --enable-libtheora
   --enable-libtwolame
   --enable-libv4l2
-  --enable-libvo-amrwbenc
+  %if %enable_license_lgplv3
+    --enable-libvo-amrwbenc
+  %endif
   --enable-libvorbis
   --enable-libwavpack
   --enable-libwebp
@@ -242,7 +246,9 @@ conf_lib_opts="--enable-chromaprint
     %endif
   %endif
   %if %enable_license_gplv2
-    --enable-libsmbclient
+    %if %enable_license_lgplv3
+      --enable-libsmbclient
+    %endif
   %endif
   %if %enable_license_gplv2
     --enable-libx264
