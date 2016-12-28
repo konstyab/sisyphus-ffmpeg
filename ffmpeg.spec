@@ -6,16 +6,19 @@ Release: alt5
 
 %if %enable_license_gplv2
   %if %enable_license_lgplv3
-    License: GPLv3+
+    %define license GPLv3+
   %else
-    License: GPLv2+
+    %define license GPLv2+
 %else
   %if %enable_license_lgplv3
-    License: LGPLv3+
+    %define license LGPLv3+
   %else
-    License: LGPLv2+
+    %define license LGPLv2+
   %endif
 %endif
+
+License: %license
+
 
 %if %enable_license_glpv2
   %define use_libx265 1
